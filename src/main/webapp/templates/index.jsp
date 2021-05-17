@@ -4,7 +4,8 @@
 
 <html>
 <body>
-<h2><c:out value="Hello + Wrold"/></h2>
+
+<c:redirect url="/login"/>
 
 </body>
 </html>

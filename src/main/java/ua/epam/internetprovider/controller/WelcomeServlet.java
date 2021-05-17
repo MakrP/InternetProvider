@@ -1,4 +1,4 @@
-package ua.epam.internetprovider.servlet;
+package ua.epam.internetprovider.controller;
 
 
 import ua.epam.internetprovider.entity.Service;
@@ -16,7 +16,7 @@ public class WelcomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Service service = new Service(1,"Internet");
         req.setAttribute("service",service);
-        req.getRequestDispatcher("/templates/service.jsp").forward(req,resp);
+        req.getRequestDispatcher("/templates/list.jsp").forward(req,resp);
 
     }
 

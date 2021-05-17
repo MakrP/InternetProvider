@@ -1,4 +1,4 @@
-package ua.epam.internetprovider.db.daoimpl;
+package ua.epam.internetprovider.db.daoimpl.mysql;
 
 import ua.epam.internetprovider.db.ConnectionPool;
 import ua.epam.internetprovider.db.dao.ServiceDao;

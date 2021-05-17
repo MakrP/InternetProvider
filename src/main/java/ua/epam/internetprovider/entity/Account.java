@@ -26,6 +26,12 @@ public class Account extends Entity{
         this.password = password;
     }
 
+    public Account(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
     public Account() {}
 
     public long getId() {

@@ -1,14 +1,11 @@
-package ua.epam.internetprovider.db.daoimpl;
+package ua.epam.internetprovider.db.daoimpl.mysql;
 
 import ua.epam.internetprovider.db.ConnectionPool;
 import ua.epam.internetprovider.db.dao.AccountDao;
 import ua.epam.internetprovider.entity.Account;
 import ua.epam.internetprovider.entity.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class MySqlAccountDao implements AccountDao {
     @Override
     public Long getRoleIdByTitle(String title) {
         try(Connection connection = ConnectionPool.getConnection();
-            PreparedStatement ps = connection.prepareStatement(FIND_ACCOUNT_BY_LOGIN_AND_PASSWORD)) {
+            PreparedStatement ps = connection.prepareStatement(FIND_ROLE_ID_BY_TITLE)) {
             ps.setString(1,title);
             try(ResultSet rs = ps.executeQuery()) {
                 if(rs.next()) {
@@ -81,11 +78,16 @@ public class MySqlAccountDao implements AccountDao {
     @Override
     public void save(Account account) {
         try(Connection connection = ConnectionPool.getConnection();
-            PreparedStatement ps = connection.prepareStatement(SAVE_ACCOUNT)) {
+            PreparedStatement ps = connection.prepareStatement(SAVE_ACCOUNT, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1,account.getLogin());
             ps.setString(2,account.getPassword());
             ps.setLong(3,getRoleIdByTitle(account.getRole()));
             ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    account.setId(rs.getInt(1));
+                }
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

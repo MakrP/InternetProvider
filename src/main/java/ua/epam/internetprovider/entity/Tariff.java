@@ -4,6 +4,7 @@ public class Tariff extends Entity {
     private long id;
     private String title;
     private int price;
+    private long serviceId;
 
     public Tariff(long id, String title, int price) {
         this.id = id;
@@ -11,7 +12,23 @@ public class Tariff extends Entity {
         this.price = price;
     }
 
-    public Tariff()  {}
+
+    public Tariff(long id, String title, int price, int serviceId) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.serviceId = serviceId;
+    }
+
+
+    public Tariff(String title, int price, long serviceId) {
+        this.title = title;
+        this.price = price;
+        this.serviceId = serviceId;
+    }
+
+    public Tariff() {
+    }
 
     public long getId() {
         return id;
@@ -35,5 +52,13 @@ public class Tariff extends Entity {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(long serviceId) {
+        this.serviceId = serviceId;
     }
 }

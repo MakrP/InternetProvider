@@ -1,4 +1,4 @@
-package ua.epam.internetprovider.servlet;
+package ua.epam.internetprovider.controller;
 
 import ua.epam.internetprovider.entity.Service;
 import ua.epam.internetprovider.service.ServiceService;
@@ -18,7 +18,7 @@ public class ServiceServlet extends HttpServlet {
         ServiceService serviceService = new ServiceService();
         List<Service> serviceList = serviceService.getAll();
         req.setAttribute("services",serviceList);
-        req.getRequestDispatcher("/templates/service/service.jsp").forward(req,resp);
+        req.getRequestDispatcher("/templates/service/list.jsp").forward(req,resp);
     }
 
     @Override

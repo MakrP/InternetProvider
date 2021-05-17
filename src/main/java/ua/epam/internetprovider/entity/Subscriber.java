@@ -5,7 +5,7 @@ package ua.epam.internetprovider.entity;
  * @author Marko Popyk
  * @version 1.0
  */
-public class Subscriber {
+public class Subscriber extends Entity {
     private long accountId;
     private String name;
     private String surname;
@@ -28,6 +28,12 @@ public class Subscriber {
         this.surname = surname;
         this.balance = balance;
         this.status = status;
+    }
+
+    public Subscriber(long accountId, String name, String surname) {
+        this.accountId = accountId;
+        this.name = name;
+        this.surname = surname;
     }
 
     public long getAccountId() {

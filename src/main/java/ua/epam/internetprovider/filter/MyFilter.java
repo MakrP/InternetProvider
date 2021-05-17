@@ -6,6 +6,7 @@ import ua.epam.internetprovider.service.ServiceService;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,14 +20,20 @@ public class MyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if(request.getServletContext().getAttribute("services") == null) {
+        HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+        if (httpRequest.getServletContext().getAttribute("services") == null) {
             ServiceService serviceService = new ServiceService();
             List<Service> serviceList = serviceService.getAll();
-            request.getServletContext().setAttribute("services",serviceList);
+            httpRequest.getServletContext().setAttribute("services", serviceList);
         }
-        filterChain.doFilter(servletRequest,servletResponse);
-
+        if (httpRequest.getSession().getAttribute("account") == null &&
+                !httpRequest.getServletPath().equals("/login")) {
+            String contextPath = httpRequest.getContextPath();
+            httpResponse.sendRedirect(contextPath + "/login");
+            return;
+        }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
