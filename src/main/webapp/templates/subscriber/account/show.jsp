@@ -6,14 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ include file="../../fragment/import.jsp" %>
+<%@ include file="/templates/fragment/import.jsp" %>
 
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="../../fragment/subscriber_navbar.jsp"/>
+<jsp:include page="/templates/fragment/subscriber_navbar.jsp"/>
 <div class="container p-4">
     <div class="row">
         <div class="col-md-12">
@@ -33,7 +33,7 @@
                             <td><fmt:message key="account_details.label.balance"/>:</td>
                             <td>${subscriber.balance}</td>
                             <td>
-                                <a class="btn btn-success" href="<c:url value="/balance"/>">
+                                <a class="btn btn-success" href="<c:url value="/controller?command=Balance"/>">
                                     <fmt:message key="account_details.btn.top_up_account"/>
                                 </a>
                             </td>
@@ -63,7 +63,7 @@
                     </table>
                 </div>
                 <div class="text-center">
-                    <form action="<c:url value="/logout"/>" method="post" class="align-center">
+                    <form action="<c:url value="/controller?command=Logout"/>" method="post" class="align-center">
                         <button class="button btn-danger" type="submit">
                             <fmt:message key="account_details.btn.logout"/>
                         </button>

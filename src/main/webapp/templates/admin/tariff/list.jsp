@@ -6,7 +6,7 @@
 <body>
 <jsp:include page="/templates/fragment/admin_navbar.jsp"/>
 <div class="text-center mt-3">
-    <a class="btn btn-primary" href="<c:url value="/tariff/create"/>">
+    <a class="btn btn-primary" href="<c:url value="/controller?command=TariffCreate"/>">
         <fmt:message key="admin_tariff_create.btn.create"/>
     </a>
 </div>

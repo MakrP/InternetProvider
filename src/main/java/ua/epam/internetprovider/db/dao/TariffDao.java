@@ -11,4 +11,9 @@ public interface TariffDao extends BaseDao<Tariff,Long> {
     Service getTariffService(Tariff tariff);
     int getTariffsCountForService(Service service);
     List<Tariff> getServiceTariffs(Service service,int offset,int count);
+    List<Tariff> getServiceTariffsSortByTitleDesc(Service service,int offset,int count);
+    List<Tariff> getServiceTariffsSortByTitleAsc(Service service,int offset,int count);
+    List<Tariff> getServiceTariffsSortByPriceDesc(Service service,int offset,int count);
+    List<Tariff> getServiceTariffsSortByPriceAsc(Service service,int offset,int count);
+
 }

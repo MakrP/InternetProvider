@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="<c:url value="/admin/subscriber"/>" class="text-primary">Subscribers</a>
+                    <a href="<c:url value="/controller?command=SubscriberList"/>" class="text-primary">Subscribers</a>
                 </h5>
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="<c:url value="/admin/tariff"/>" class="text-primary">Tariffs</a>
+                    <a href="<c:url value="/controller?command=AdminTariffList"/>" class="text-primary">Tariffs</a>
                 </h5>
             </div>
         </div>

@@ -21,7 +21,7 @@
                     <fmt:message key="account_details.btn.top_up_account"/>
                 </h5>
                 <div class="mt-3">
-                    <form class="form-group" action="<c:url value="/balance"/>" method="post">
+                    <form class="form-group" action="<c:url value="/controller?command=Balance"/>" method="post">
                         <label for="total"><fmt:message key="account_details.label.balance"/></label>
                         <input id="total" name="increase_total" type="number" min="30" max="5000"/>
                         <button class="btn btn-success" type="submit">

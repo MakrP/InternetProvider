@@ -22,7 +22,7 @@
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-10 col-md-8 col-lg-6 d-flex justify-content-center">
-            <form class="form" method="post" action="<c:url value="/login"/>">
+            <form class="form" method="post" action="<c:url value="/controller?command=Login"/>">
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <label for="inputLogin" class="sr-only">Email address</label>
                 <input type="text" id="inputLogin" name="login" class="form-control" placeholder="Login"

@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="/templates/fragment/admin_navbar.jsp"/>
 <div class="text-center mt-3">
-    <a class="btn btn-primary" href="<c:url value="/subscriber/create"/>">
+    <a class="btn btn-primary" href="<c:url value="/controller?command=SubscriberCreate"/>">
         <fmt:message key="admin_subscriber_list.btn.register"/>
     </a>
 </div>

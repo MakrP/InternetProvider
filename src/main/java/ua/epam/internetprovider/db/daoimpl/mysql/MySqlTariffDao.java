@@ -20,6 +20,10 @@ public class MySqlTariffDao implements TariffDao {
             "on t.service_id = s.id where t.id = ?";
 
     private static final String GET_TARIFFS_COUNT_FOR_SERVICE = "select count(*) as tariff_count from tariff where service_id = ?";
+    private static final String GET_N_TARIFFS_WITH_OFFSET_SORT_BY_TITLE_ASC_FOR_SERVICE = "select id,title,price from tariff where service_id = ? order by title asc limit ?,? ";
+    private static final String GET_N_TARIFFS_WITH_OFFSET_SORT_BY_TITLE_DESC_FOR_SERVICE = "select id,title,price from tariff where service_id = ? order by title desc limit ?,? ";
+    private static final String GET_N_TARIFFS_WITH_OFFSET_SORT_BY_PRICE_ASC_FOR_SERVICE = "select id,title,price from tariff where service_id = ? order by price asc limit ?,?";
+    private static final String GET_N_TARIFFS_WITH_OFFSET_SORT_BY_PRICE_DESC_FOR_SERVICE = "select id,title,price from tariff where service_id = ? order by price desc limit ?,?";
 
     @Override
     public List<Tariff> getServiceTariffs(Service service) {
@@ -88,9 +92,34 @@ public class MySqlTariffDao implements TariffDao {
 
     @Override
     public List<Tariff> getServiceTariffs(Service service, int offset, int count) {
+        return getTariffsWithOffset(FIND_N_TARIFFS_WITH_OFFSET,service,offset,count);
+    }
+
+    @Override
+    public List<Tariff> getServiceTariffsSortByTitleDesc(Service service, int offset, int count) {
+        return getTariffsWithOffset(GET_N_TARIFFS_WITH_OFFSET_SORT_BY_TITLE_DESC_FOR_SERVICE,service,offset,count);
+    }
+
+    @Override
+    public List<Tariff> getServiceTariffsSortByTitleAsc(Service service, int offset, int count) {
+        return getTariffsWithOffset(GET_N_TARIFFS_WITH_OFFSET_SORT_BY_TITLE_ASC_FOR_SERVICE,service,offset,count);
+    }
+
+    @Override
+    public List<Tariff> getServiceTariffsSortByPriceDesc(Service service, int offset, int count) {
+        return getTariffsWithOffset(GET_N_TARIFFS_WITH_OFFSET_SORT_BY_TITLE_DESC_FOR_SERVICE,service,offset,count);
+    }
+
+    @Override
+    public List<Tariff> getServiceTariffsSortByPriceAsc(Service service, int offset, int count) {
+        return getTariffsWithOffset(GET_N_TARIFFS_WITH_OFFSET_SORT_BY_PRICE_ASC_FOR_SERVICE,service,offset,count);
+    }
+
+
+    public List<Tariff> getTariffsWithOffset(String query,Service service, int offset, int count) {
         List<Tariff> tariffs = new ArrayList<>();
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement ps = connection.prepareStatement(FIND_N_TARIFFS_WITH_OFFSET)) {
+             PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setLong(1, service.getId());
             ps.setLong(2, offset);
             ps.setLong(3, count);
@@ -100,7 +129,8 @@ public class MySqlTariffDao implements TariffDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return tariffs;    }
+        return tariffs;
+    }
 
     @Override
     public List<Tariff> findAll() {
@@ -154,7 +184,7 @@ public class MySqlTariffDao implements TariffDao {
             ps.setLong(3, tariff.getServiceId());
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                if(rs.next()) {
+                if (rs.next()) {
                     tariff.setId(rs.getLong(1));
                 }
             }

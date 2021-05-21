@@ -1,9 +1,8 @@
-<%@ taglib prefix="fmtL" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 16.05.2021
-  Time: 19:36
+  Date: 20.05.2021
+  Time: 21:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="/templates/fragment/import.jsp" %>
@@ -19,7 +18,7 @@
     </h3>
 </div>
 <div class="mt-2 p-4 w-100">
-    <form action="<c:url value="/controller?command=TariffCreate"/>" method="post">
+    <form action="<c:url value="/tariff/create"/>" method="post">
         <div class="form-group mt-2">
             <label for="titleInput">Title</label>
             <input type="text" class="form-control" id="titleInput" name="title" placeholder="Title" required=""
@@ -31,14 +30,6 @@
             <input type="number" class="form-control" id="priceInput" name="price" placeholder="Price"
                    required=""
                    min="1" max="1000">
-        </div>
-        <div class="form-group mt-2">
-            <label for="serviceSelect">Service</label>
-            <select class="form-select" id="serviceSelect" name="service">
-                <c:forEach var="service" items="${services}">
-                    <option value="${service.id}">${service.title}</option>
-                </c:forEach>
-            </select>
         </div>
         <div class="w-100 text-center mt-2">
             <button type="submit" class="btn btn-primary">

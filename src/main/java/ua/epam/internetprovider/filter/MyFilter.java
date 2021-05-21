@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebFilter("/*")
+@WebFilter("/controller/*")
 public class MyFilter implements Filter {
 
     @Override
@@ -26,12 +26,6 @@ public class MyFilter implements Filter {
             ServiceService serviceService = new ServiceService();
             List<Service> serviceList = serviceService.getAll();
             httpRequest.getServletContext().setAttribute("services", serviceList);
-        }
-        if (httpRequest.getSession().getAttribute("account") == null &&
-                !httpRequest.getServletPath().equals("/login")) {
-            String contextPath = httpRequest.getContextPath();
-            httpResponse.sendRedirect(contextPath + "/login");
-            return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

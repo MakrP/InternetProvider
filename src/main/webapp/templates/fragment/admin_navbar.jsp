@@ -25,7 +25,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<c:url value="/admin"/>">EPAMNET</a>
+        <a class="navbar-brand" href="<c:url value="/controller?command=AdminIndex"/>">EPAMNET</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,19 +34,19 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="<c:url value="/admin/tariff"/>">
+                       href="<c:url value="/controller?command=AdminTariffList"/>">
                         Tariffs
                     </a>
                 </li>
                 <li>
                     <a class="nav-link"
-                       href="<c:url value="/admin/subscriber"/>">
+                       href="<c:url value="/controller?command=SubscriberList"/>">
                         Subscribers
                     </a>
                 </li>
             </ul>
 
-            <form class="form d-flex" method="post" action="<c:url value="/logout"/>">
+            <form class="form d-flex" method="post" action="<c:url value="/controller?command=Logout"/>">
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </div>
