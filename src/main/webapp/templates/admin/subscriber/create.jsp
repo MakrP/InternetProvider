@@ -6,7 +6,7 @@
   Time: 19:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ include file="/templates/fragment/import.jsp" %>
+<%@ include file="/templates/fragment/import_taglib.jsp" %>
 <html>
 <head>
     <title>Title</title>

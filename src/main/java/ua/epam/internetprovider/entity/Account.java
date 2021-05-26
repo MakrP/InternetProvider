@@ -12,7 +12,7 @@ public class Account extends Entity{
     private long id;
     private String login;
     private String password;
-    private String role;
+    private Role role;
 
 
     public Account(long id, String login, String password) {
@@ -26,7 +26,7 @@ public class Account extends Entity{
         this.password = password;
     }
 
-    public Account(String login, String password, String role) {
+    public Account(String login, String password, Role role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -73,11 +73,11 @@ public class Account extends Entity{
         return Objects.hash(login, password);
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

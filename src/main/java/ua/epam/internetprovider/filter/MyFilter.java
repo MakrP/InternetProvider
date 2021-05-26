@@ -2,6 +2,8 @@ package ua.epam.internetprovider.filter;
 
 import ua.epam.internetprovider.entity.Service;
 import ua.epam.internetprovider.service.ServiceService;
+import ua.epam.internetprovider.service.exception.ServiceException;
+import ua.epam.internetprovider.service.factory.ServiceFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -23,8 +25,13 @@ public class MyFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         if (httpRequest.getServletContext().getAttribute("services") == null) {
-            ServiceService serviceService = new ServiceService();
-            List<Service> serviceList = serviceService.getAll();
+            ServiceService serviceService = ServiceFactory.getServiceService();
+            List<Service> serviceList = null;
+            try {
+                serviceList = serviceService.getAll();
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
             httpRequest.getServletContext().setAttribute("services", serviceList);
         }
         filterChain.doFilter(servletRequest, servletResponse);

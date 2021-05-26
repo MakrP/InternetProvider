@@ -3,7 +3,6 @@ package ua.epam.internetprovider.controller;
 import ua.epam.internetprovider.controller.command.Command;
 import ua.epam.internetprovider.controller.command.factory.CommandFactory;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,19 +26,22 @@ public class DispatcherServlet extends HttpServlet {
 
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String url = "/error.jsp";
-        Command command = null;
+        Forward forward = null;
+        Command command;
         try {
             command = CommandFactory.getCommand(req);
-            url = command.execute(req, resp);
+            forward = command.execute(req, resp);
         } catch (Exception e) {
             Logger.getLogger("TmpLogger").log(Level.SEVERE, "Error during command " + e);
         }
-        if (req.getMethod().equals("GET")) {
-            req.getRequestDispatcher(url).forward(req, resp);
-        } else {
-            String contextPath = getServletContext().getContextPath();
-            resp.sendRedirect(contextPath + url);
+        if (forward != null) {
+            if (forward.isRedirect()) {
+                String contextPath = req.getServletContext().getContextPath();
+                resp.sendRedirect(contextPath + forward.getResource());
+            } else {
+                req.getRequestDispatcher(forward.getResource()).forward(req, resp);
+
+            }
         }
     }
 }

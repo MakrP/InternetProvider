@@ -1,5 +1,7 @@
 package ua.epam.internetprovider.entity;
 
+import java.util.Objects;
+
 public class Tariff extends Entity {
     private long id;
     private String title;
@@ -28,6 +30,19 @@ public class Tariff extends Entity {
     }
 
     public Tariff() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tariff tariff = (Tariff) o;
+        return id == tariff.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public long getId() {

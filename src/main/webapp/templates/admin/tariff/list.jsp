@@ -1,4 +1,4 @@
-<%@ include file="/templates/fragment/import.jsp" %>
+<%@ include file="/templates/fragment/import_taglib.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -34,7 +34,7 @@
                     <td>${tariff.price}</td>
                     <td>${serviceService.getTariffService(tariff).title}</td>
                     <td>
-                        <a class="btn btn-success" href="<c:url value="/tariffs/update?id=${tariff.id}"/>">
+                        <a class="btn btn-success" href="<c:url value="/controller?command=TariffUpdate&tariffId=${tariff.id}"/>">
                             <fmt:message key="admin_tariff_list.btn.update"/>
                         </a>
                         <a class="btn btn-danger ml-3" href="<c:url value="/tariff/delete?id=${tariff.id}"/>">
